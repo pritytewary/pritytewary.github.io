@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [nav, setNav] = useState(false);
 
   const links = [
-    { id: 1, link: "Home" },
-    { id: 2, link: "About" },
-    { id: 3, link: "Services" },
-    { id: 4, link: "Skills" },
-    { id: 5, link: "Project" },
-    { id: 6, link: "Contact" },
+    { id: 1, link: "Works", href: "/works" },
+    { id: 2, link: "Skillsets", href: "/skillsets" },
+    { id: 3, link: "Blog", href: "/blog" },
+    { id: 4, link: "Contact", href: "/contact" },
   ];
 
   return (
@@ -28,12 +27,18 @@ const NavBar = () => {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="text-4xl font-bold"
         >
-          Portfolio.
+          <Link
+            to={"/"}
+            className="hover:text-blue-500 transition duration-300"
+          >
+            {" "}
+            Prity
+          </Link>
         </motion.h1>
       </div>
 
       <ul className="hidden md:flex">
-        {links.map(({ id, link }, index) => (
+        {links.map(({ id, link, href }, index) => (
           <motion.li
             key={id}
             initial={{ opacity: 0, y: -20 }}
@@ -42,7 +47,7 @@ const NavBar = () => {
             className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white"
           >
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-              {link}
+              <Link to={href}>{link}</Link>
             </motion.div>
           </motion.li>
         ))}
@@ -64,7 +69,7 @@ const NavBar = () => {
           transition={{ duration: 0.5 }}
           className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-black to-gray-800 text-gray-500"
         >
-          {links.map(({ id, link }, index) => (
+          {links.map(({ id, link, href }, index) => (
             <motion.li
               key={id}
               initial={{ opacity: 0, x: -50 }}
@@ -73,7 +78,9 @@ const NavBar = () => {
               className="px-4 cursor-pointer capitalize py-6 text-4xl"
             >
               <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                {link}
+                <Link to={href} onClick={() => setNav(false)}>
+                  {link}
+                </Link>
               </motion.div>
             </motion.li>
           ))}

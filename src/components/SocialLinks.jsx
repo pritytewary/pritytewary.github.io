@@ -14,33 +14,36 @@ const SocialLinks = () => {
       id: 1,
       child: <FaLinkedin size={30} />,
       href: "https://linkedin.com",
-      style: "rounded-tr-md",
-      color: "bg-blue-600",
+      color: "from-blue-600 to-blue-400",
+      hoverColor: "from-blue-400 to-blue-600",
     },
     {
       id: 2,
       child: <FaGithub size={30} />,
       href: "https://github.com",
-      color: "bg-gray-800",
+      color: "from-gray-800 to-gray-600",
+      hoverColor: "from-gray-600 to-gray-800",
     },
     {
       id: 3,
       child: <FaTwitter size={30} />,
       href: "https://twitter.com",
-      color: "bg-blue-400",
+      color: "from-blue-400 to-blue-300",
+      hoverColor: "from-blue-300 to-blue-400",
     },
     {
       id: 4,
       child: <FaYoutube size={30} />,
       href: "https://youtube.com",
-      color: "bg-red-600",
+      color: "from-red-600 to-red-500",
+      hoverColor: "from-red-500 to-red-600",
     },
     {
       id: 5,
       child: <FaTelegram size={30} />,
       href: "https://telegram.com",
-      style: "rounded-br-md",
-      color: "bg-blue-500",
+      color: "from-blue-500 to-blue-400",
+      hoverColor: "from-blue-400 to-blue-500",
     },
   ];
 
@@ -49,26 +52,37 @@ const SocialLinks = () => {
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8 }}
-      className="hidden lg:flex flex-col top-[35%] left-0 fixed"
+      className="hidden lg:flex flex-col top-[35%] left-0 fixed z-50"
     >
-      <ul>
-        {links.map(({ id, child, href, style, color }, index) => (
+      <ul className="space-y-3">
+        {links.map(({ id, child, href, color, hoverColor }, index) => (
           <motion.li
             key={id}
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
-            className={`flex justify-between items-center w-40 h-14 px-4 ml-[-100px] hover:ml-[-10px] hover:rounded-md duration-300 ${color} ${style}`}
+            className="relative"
           >
             <motion.a
               href={href}
-              className="flex justify-between items-center w-full text-white"
+              className={`flex items-center w-40 h-14 px-4 ml-[-100px] rounded-full bg-gradient-to-r ${color} hover:ml-[-10px] transition-all duration-300 shadow-lg`}
               target="_blank"
               rel="noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{
+                scale: 1.05,
+                backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))`,
+                boxShadow:
+                  "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+              }}
+              whileTap={{ scale: 0.95 }}
             >
-              {child}
+              <span className="text-white">{child}</span>
+              <motion.span
+                className="absolute left-14 text-white font-semibold opacity-0 transition-opacity duration-300"
+                whileHover={{ opacity: 1 }}
+              >
+                {href.split("//")[1].split(".")[0]}
+              </motion.span>
             </motion.a>
           </motion.li>
         ))}

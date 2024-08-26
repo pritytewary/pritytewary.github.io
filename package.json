@@ -12,9 +12,11 @@
   "dependencies": {
     "aos": "^3.0.0-beta.6",
     "framer-motion": "^11.3.30",
+    "mongoose": "^8.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
+    "react-router-dom": "^6.26.1",
     "remixicon": "^3.5.0"
   },
   "devDependencies": {
