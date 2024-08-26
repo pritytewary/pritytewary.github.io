@@ -1,63 +1,85 @@
 import React, { useState } from "react";
-
 import { FaBars, FaTimes } from "react-icons/fa";
+import { motion } from "framer-motion";
 
-export const NavBar = () => {
+const NavBar = () => {
   const [nav, setNav] = useState(false);
 
   const links = [
-    {
-      id: 1,
-      link: "works",
-    },
-    {
-      id: 2,
-      link: "Skillsets",
-    },
-    {
-      id: 3,
-      link: "Blog",
-    },
-    {
-      id: 4,
-      link: "Contact",
-    },
+    { id: 1, link: "Home" },
+    { id: 2, link: "About" },
+    { id: 3, link: "Services" },
+    { id: 4, link: "Skills" },
+    { id: 5, link: "Project" },
+    { id: 6, link: "Contact" },
   ];
 
   return (
-    <div className="flex  justify-between items-center w-full h-20 text-white bg-black px-4 ">
+    <motion.div
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="fixed w-full h-20 flex justify-between items-center px-4 bg-gradient-to-r from-gray-900 to-black text-white z-50"
+    >
       <div>
-        <h1 className=" font-medium text-5xl font-signature ml-2 ">Prity</h1>
+        <motion.h1
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-4xl font-bold"
+        >
+          Portfolio.
+        </motion.h1>
       </div>
+
       <ul className="hidden md:flex">
-        {links.map(({ id, link }) => (
-          <li
+        {links.map(({ id, link }, index) => (
+          <motion.li
             key={id}
-            className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+            className="px-4 cursor-pointer capitalize font-medium text-gray-300 hover:text-white"
           >
-            {link}
-          </li>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              {link}
+            </motion.div>
+          </motion.li>
         ))}
       </ul>
-      <div
+
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         onClick={() => setNav(!nav)}
         className="cursor-pointer pr-4 z-10 text-gray-500 md:hidden"
       >
         {nav ? <FaTimes size={30} /> : <FaBars size={30} />}
-      </div>
+      </motion.div>
+
       {nav && (
-        <ul className="flex flex-col justify-center items-center  absolute  top-0  left-0 w-full h-screen bg-gradient-to-b from-black to-gray-500">
-          {links.map(({ id, link }) => (
-            <li
+        <motion.ul
+          initial={{ opacity: 0, x: "-100%" }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-black to-gray-800 text-gray-500"
+        >
+          {links.map(({ id, link }, index) => (
+            <motion.li
               key={id}
-              className="px-4 cursor-pointer capitalize font-medium text-gray-700 hover:scale-105 duration-200"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+              className="px-4 cursor-pointer capitalize py-6 text-4xl"
             >
-              {link}
-            </li>
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                {link}
+              </motion.div>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       )}
-    </div>
+    </motion.div>
   );
 };
 
