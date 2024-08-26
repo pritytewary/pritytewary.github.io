@@ -29,7 +29,7 @@ const NavBar = () => {
         >
           <Link
             to={"/"}
-            className="hover:text-blue-500 transition duration-300"
+            className="hover:text-blue-500 transition duration-300 font-signature"
           >
             {" "}
             Prity

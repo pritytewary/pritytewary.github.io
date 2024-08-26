@@ -5,6 +5,9 @@ export default {
     extend: {},
     fontFamily: {
       signature: ["Great Vibes"],
+      poppins: ["Poppins", "sans-serif"],
+      inter: ["Inter", "sans-serif"],
+      nunito: ["Nunito Sans", "sans-serif"],
     },
   },
 
